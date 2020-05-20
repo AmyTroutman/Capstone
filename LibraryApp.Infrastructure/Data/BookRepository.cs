@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LibraryApp.Infrastructure.Data
 {
-    class BookRepository
+    public class BookRepository
     {
     }
 }
