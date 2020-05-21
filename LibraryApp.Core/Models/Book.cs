@@ -19,5 +19,8 @@ namespace LibraryApp.Core.Models
 
         public int SeriesId { get; set; }
         public Series Series { get; set; }
+
+        public int CatalogId { get; set; }
+        public Catalog Catalog { get; set; }
     }
 }

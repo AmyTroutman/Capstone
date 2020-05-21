@@ -11,7 +11,7 @@ namespace LibraryApp.Core.Models
 
         //if adding users, uncomment
         //public string UserId { get; set; }
-        //public AppUser User { get; set; }
+        //public User User { get; set; }
 
         public ICollection<Book> Books { get; set; }
     }
