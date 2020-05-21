@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using LibraryApp.Core.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace LibraryApp.Infrastructure.Data
         //public DbSet<Author> Authors { get; set; }
         //public DbSet<Series> Series { get; set; }
         //public DbSet<Catalog> Catalogs { get; set; }
+        //todo check that this is correct (Checkpoint)
+        //public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
