@@ -13,6 +13,6 @@ namespace LibraryApp.ApiModels
 
         //if you add users:
         public string UserId { get; set; }
-        public string OwnerName { get; set; }
+        public string UserName { get; set; }
     }
 }

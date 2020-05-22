@@ -11,6 +11,7 @@ namespace LibraryApp.Core.Services
         Series Update(Series series);
         Series Get(int id);
         IEnumerable<Series> GetAll();
+        //IEnumerable<Series> GetBooksForSeries(int seriesId);
         void Remove(Series series);
     }
 }

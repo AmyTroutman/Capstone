@@ -15,7 +15,7 @@ namespace LibraryApp.ApiModels
                 Id = catalog.Id,
                 Name = catalog.Name,
                 UserId = catalog.UserId,
-                OwnerName = catalog.User.FullName
+                UserName = catalog.User.FullName
             };
         }
 
@@ -25,8 +25,7 @@ namespace LibraryApp.ApiModels
             {
                 Id = catalogModel.Id,
                 Name = catalogModel.Name,
-                UserId = catalogModel.UserId,
-                OwnerName = catalogModel.User
+                UserId = catalogModel.UserId,                
             };
         }
 

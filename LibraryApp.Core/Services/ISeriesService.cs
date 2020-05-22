@@ -12,7 +12,7 @@ namespace LibraryApp.Core.Services
         Series Get(int id);
         IEnumerable<Series> GetAll();
         //Do I need this here? Could I just use Book's method
-        IEnumerable<Series> GetBooksForSeries();
-        Series Remove(int id);
+        //IEnumerable<Series> GetBooksForSeries(int seriesId);
+        void Remove(int id);
     }
 }
