@@ -32,15 +32,15 @@ namespace LibraryApp.ApiModels
             };
         }
 
-        //todo check, but pretty sure I want series tied to author
-        public static IEnumerable<AuthorModel> ToApiModels(this IEnumerable<Author> authors)
+        //todo check if this is correct
+        public static IEnumerable<SeriesModel> ToApiModels(this IEnumerable<Series> series)
         {
-            return authors.Select(a => a.ToApiModel());
+            return series.Select(a => a.ToApiModel());
         }
 
-        public static IEnumerable<Author> ToDomainModel(this IEnumerable<AuthorModel> authorModels)
+        public static IEnumerable<Series> ToDomainModel(this IEnumerable<SeriesModel> seriesModels)
         {
-            return authorModels.Select(a => a.ToDomainModel());
+            return seriesModels.Select(a => a.ToDomainModel());
         }
     }
 }
