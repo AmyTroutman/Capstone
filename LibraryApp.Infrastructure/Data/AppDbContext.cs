@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace LibraryApp.Infrastructure.Data
 {
-    public class AppDbContext : DbContext //If you add users, change to IdentityDbContext<User>
+    public class AppDbContext : IdentityDbContext<User>
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Catalog> Catalogs { get; set; }

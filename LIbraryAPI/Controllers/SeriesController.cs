@@ -7,96 +7,95 @@ using LibraryApp.Core.Models;
 using LibraryApp.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace LibraryApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthorsController : ControllerBase
+    public class SeriesController : ControllerBase
     {
-        private readonly IAuthorService _authorService;
+        private readonly ISeriesService _seriesService;
 
-        public AuthorsController(IAuthorService authorService)
+        public SeriesController(ISeriesService seriesService)
         {
-            _authorService = authorService;
+            _seriesService = seriesService;
         }
 
-        // GET: api/Authors
+        //GET: api/Series
         [HttpGet]
         public IActionResult Get()
         {
             try
             {
-                var allAuthors = _authorService.GetAll().ToList();
-                return Ok(allAuthors.ToApiModels());
+                var allSeries = _seriesService.GetAll().ToList();
+                return Ok(allSeries.ToApiModels());
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                ModelState.AddModelError("GetAuthors", ex.Message);
+                ModelState.AddModelError("GetSeries", ex.Message);
                 return BadRequest(ModelState);
             }
         }
 
-        // GET: api/Authors/5
+        //GET: api/Series/4
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             try
             {
-                var author = _authorService.Get(id);
-                if (author == null) return NotFound();
-                return Ok(author.ToApiModel());
+                var series = _seriesService.Get(id);
+                if (series == null) return NotFound();
+                return Ok(series.ToApiModel());
             }
             catch(Exception ex)
             {
-                ModelState.AddModelError("GetAuthor", ex.Message);
+                ModelState.AddModelError("GetSeries", ex.Message);
                 return BadRequest(ModelState);
             }
         }
 
-        // POST: api/Authors
+        //POST: api/Series
         [HttpPost]
-        public IActionResult Post([FromBody] Author author)
+        public IActionResult Post([FromBody] Series series)
         {
             try
             {
-                return Ok(_authorService.Add(author).ToApiModel());
+                return Ok(_seriesService.Add(series).ToApiModel());
             }
             catch(Exception ex)
             {
-                ModelState.AddModelError("AddAuthor", ex.Message);
+                ModelState.AddModelError("AddSeries", ex.Message);
                 return BadRequest(ModelState);
             }
         }
 
-        // PUT: api/Authors/5
+        //PUT: api/Series/4
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Author author)
+        public IActionResult Put(int id, [FromBody] Series series)
         {
             try
             {
-                return Ok(_authorService.Update(author).ToApiModel());
+                return Ok(_seriesService.Update(series).ToApiModel());
             }
             catch(Exception ex)
             {
-                ModelState.AddModelError("UpdateAuthor", ex.Message);
+                ModelState.AddModelError("UpdateSeries", ex.Message);
                 return BadRequest(ModelState);
             }
         }
 
-        // DELETE: api/ApiWithActions/5
+        //DELETE: api/Series/4
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             try
             {
-                _authorService.Remove(id);
+                _seriesService.Remove(id);
                 return Ok();
             }
             catch(Exception ex)
             {
-                ModelState.AddModelError("DeleteAuthor", ex.Message);
+                ModelState.AddModelError("DeleteSeries", ex.Message);
                 return BadRequest(ModelState);
             }
         }

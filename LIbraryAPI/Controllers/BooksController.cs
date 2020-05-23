@@ -67,8 +67,8 @@ namespace LibraryApp.Controllers
             return Ok(bookModels);
         }
 
-        // GET api/author/{authorId}/books
-        [HttpGet("/api/authors/{authorId}/books")]
+        // GET api/series/{seriesId}/books
+        [HttpGet("/api/series/{seriesId}/books")]
         public IActionResult GetBooksForSeries(int seriesId)
         {
             var bookModels = _bookService
