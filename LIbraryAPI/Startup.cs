@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryApp;
 using LibraryApp.Core.Models;
 using LibraryApp.Core.Services;
 using LibraryApp.Infrastructure.Data;
@@ -34,8 +35,6 @@ namespace LIbraryAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<AppDbContext>();
-
             // Use SQL Database if in Azure, otherwise, use SQLite
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
                 services.AddDbContext<AppDbContext>(options =>
@@ -47,10 +46,8 @@ namespace LIbraryAPI
             // Automatically perform database migration
             services.BuildServiceProvider().GetService<AppDbContext>().Database.Migrate();
 
-            //Automatically perfrom database migration
-            services.BuildServiceProvider().GetService<AppDbContext>().Database.Migrate();
             //blog startup has these:
-            //services.AddScoped<DbInitializer>();
+            services.AddScoped<DbInitializer>();
             //services.AddHttpContextAccessor();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICatalogRepository, CatalogRepository>();
@@ -86,7 +83,7 @@ namespace LIbraryAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env /*blog startup: DbInitializer dbInitializer*/)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -102,9 +99,9 @@ namespace LIbraryAPI
             app.UseHttpsRedirection();
             //app.UseStaticFiles();
             app.UseAuthentication();
-
+            app.UseMvc();
             //blog startup has this:
-            //dbInitializer.Initialize();
+            dbInitializer.Initialize();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace LibraryApp.ApiModels
                 Genre = book.Genre,
                 Notes = book.Notes,
                 Medium = book.Medium,
-                BranchName = book.BranchName,
+                //BranchName = book.BranchName,
                 AuthorId = book.AuthorId,
                 Author = book.Author != null ? book.Author.LastName + ", " + book.Author.FirstName : null,
                 SeriesId = book.SeriesId,
@@ -36,7 +36,7 @@ namespace LibraryApp.ApiModels
                 Genre = bookModel.Genre,
                 Notes = bookModel.Notes,
                 Medium = bookModel.Medium,
-                BranchName = bookModel.BranchName,
+                //BranchName = bookModel.BranchName,
                 AuthorId = bookModel.AuthorId,
                 SeriesId = bookModel.SeriesId,
                 CatalogId = bookModel.CatalogId
