@@ -97,7 +97,7 @@ namespace LIbraryAPI
             }
 
             app.UseHttpsRedirection();
-            //app.UseStaticFiles();
+            app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvc(routes =>
             {

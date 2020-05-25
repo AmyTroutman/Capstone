@@ -39,19 +39,19 @@ namespace LibraryApp.ApiModels
                 //BranchName = bookModel.BranchName,
                 AuthorId = bookModel.AuthorId,
                 SeriesId = bookModel.SeriesId,
-                CatalogId = bookModel.CatalogId
+               // CatalogId = bookModel.CatalogId
             };
         }
 
         //todo check if this should tie to catalog or user, rather than author
-        public static IEnumerable<BookModel> ToApiModels(this IEnumerable<Book> authors)
+        public static IEnumerable<BookModel> ToApiModels(this IEnumerable<Book> books)
         {
-            return authors.Select(a => a.ToApiModel());
+            return books.Select(a => a.ToApiModel());
         }
 
-        public static IEnumerable<Book> ToDomainModel(this IEnumerable<BookModel> authorModels)
+        public static IEnumerable<Book> ToDomainModel(this IEnumerable<BookModel> bookModels)
         {
-            return authorModels.Select(a => a.ToDomainModel());
+            return bookModels.Select(a => a.ToDomainModel());
         }
     }
 }
