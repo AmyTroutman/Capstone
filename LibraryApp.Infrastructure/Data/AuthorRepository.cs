@@ -28,7 +28,7 @@ namespace LibraryApp.Infrastructure.Data
         {
             return _appDbContext.Authors
                 .Include(a => a.Books)
-                .Include(a => a.Series)
+               // .Include(a => a.Books.Series)
                 .SingleOrDefault();
         }
 
@@ -36,7 +36,7 @@ namespace LibraryApp.Infrastructure.Data
         {
             return _appDbContext.Authors
                 .Include(a => a.Books)
-                .Include(a => a.Series)
+               // .Include(a => a.Series)
                 .ToList();
         }
 

@@ -27,7 +27,8 @@ namespace LibraryApp.Infrastructure.Data
         {
             return _appDbContext.Catalogs
                 .Include(c => c.Books)
-                .Include(c => c.User)
+                //would I want to include user?
+               // .Include(c => c.User)
                 .SingleOrDefault(c => c.Id == id);
         }
 
@@ -35,7 +36,7 @@ namespace LibraryApp.Infrastructure.Data
         {
             return _appDbContext.Catalogs
                 .Include(c => c.Books)
-                .Include(c => c.User)
+               // .Include(c => c.User)
                 .ToList();
         }
 

@@ -134,7 +134,7 @@ namespace LibraryApp
                         Title = "Nemesis Games",
                         Genre = "SciFi",
                         Notes = "The one where the gang is scattered throughout the solar system dealing with their own stuff.",
-                        Medium = "Harback",
+                        Medium = "Hardback",
                         Author = CreateTestAuthor("James", "Corey"),
                         Series = CreateTestSeries("The Expanse", 5)
                     }

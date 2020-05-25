@@ -12,6 +12,6 @@ namespace LibraryApp.Core.Models
 
         public ICollection<Book> Books { get; set; }
 
-        public ICollection<Series> Series { get; set; }
+        //public ICollection<Series> Series { get; set; }
     }
 }
