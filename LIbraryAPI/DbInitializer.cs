@@ -156,7 +156,6 @@ namespace LibraryApp
             return new Series
             {
                 Name = name,
-                NumInSeries = seriesNum
             };
         }
 

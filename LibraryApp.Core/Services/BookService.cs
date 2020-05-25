@@ -21,12 +21,12 @@ namespace LibraryApp.Core.Services
         public Book Add(Book book)
         {
             var currentUserId = _userService.CurrentUserId;
-            var catalogId = _catalogRepo.Get(book.CatalogId);
+            //var catalogId = _catalogRepo.Get(book.CatalogId);
 
-            if(currentUserId != catalogId.UserId)
+            /*if(currentUserId != catalogId.UserId)
             {
                 throw new ApplicationException("You are not allowed to add a book to another user's catalog.");
-            }
+            }*/
             return _bookRepo.Add(book);
         }
 

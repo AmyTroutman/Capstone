@@ -27,23 +27,18 @@ namespace LibraryApp.Infrastructure.Data
         public Series Get(int id)
         {
             return _appDbContext.Series
-                .Include(s => s.Author)
                 .Include(s => s.Books)
+                .ThenInclude(s => s.Author)
                 .SingleOrDefault(s => s.Id == id);
         }
 
         public IEnumerable<Series> GetAll()
         {
             return _appDbContext.Series
-                .Include(s => s.Author)
                 .Include(s => s.Books)
+                .ThenInclude(s=>s.Author)
                 .ToList();
         }
-
-       /* public IEnumerable<Series> GetBooksForSeries(int seriesId)
-        {
-            throw new NotImplementedException();
-        }*/
 
         public void Remove(Series series)
         {

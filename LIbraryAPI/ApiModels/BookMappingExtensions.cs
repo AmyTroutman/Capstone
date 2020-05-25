@@ -22,8 +22,8 @@ namespace LibraryApp.ApiModels
                 Author = book.Author != null ? book.Author.LastName + ", " + book.Author.FirstName : null,
                 SeriesId = book.SeriesId,
                 Series = book.Series != null ? book.Series.Name + " " + book.Series.NumInSeries : null,
-                CatalogId = book.CatalogId,
-                Catalog = book.Catalog.Name
+                //CatalogId = book.CatalogId,
+                //Catalog = book.Catalog.Name
             };
         }
 

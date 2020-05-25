@@ -15,7 +15,7 @@ namespace LibraryApp.ApiModels
                 Id = catalog.Id,
                 Name = catalog.Name,
                 UserId = catalog.UserId,
-                UserName = catalog.User.FullName
+                //UserName = catalog.User.FullName
             };
         }
 
@@ -30,14 +30,14 @@ namespace LibraryApp.ApiModels
         }
 
         //todo check if this should tie to Users
-        public static IEnumerable<CatalogModel> ToApiModels(this IEnumerable<Catalog> Users)
+        public static IEnumerable<CatalogModel> ToApiModels(this IEnumerable<Catalog> catalogs)
         {
-            return Users.Select(a => a.ToApiModel());
+            return catalogs.Select(a => a.ToApiModel());
         }
 
-        public static IEnumerable<Catalog> ToDomainModels(this IEnumerable<CatalogModel> UserModels)
+        public static IEnumerable<Catalog> ToDomainModels(this IEnumerable<CatalogModel> catalogModels)
         {
-            return UserModels.Select(a => a.ToDomainModel());
+            return catalogModels.Select(a => a.ToDomainModel());
         }
     }
 }
