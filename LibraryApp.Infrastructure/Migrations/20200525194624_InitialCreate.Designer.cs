@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryApp.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200525003722_InitialCreate")]
+    [Migration("20200525194624_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,7 +39,7 @@ namespace LibraryApp.Infrastructure.Migrations
 
                     b.Property<int>("AuthorId");
 
-                    b.Property<int>("CatalogId");
+                    b.Property<int?>("CatalogId");
 
                     b.Property<string>("Genre");
 
@@ -47,7 +47,9 @@ namespace LibraryApp.Infrastructure.Migrations
 
                     b.Property<string>("Notes");
 
-                    b.Property<int>("SeriesId");
+                    b.Property<int?>("NumInSeries");
+
+                    b.Property<int?>("SeriesId");
 
                     b.Property<string>("Title");
 
@@ -83,15 +85,9 @@ namespace LibraryApp.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AuthorId");
-
                     b.Property<string>("Name");
 
-                    b.Property<int>("NumInSeries");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
 
                     b.ToTable("Series");
                 });
@@ -264,15 +260,13 @@ namespace LibraryApp.Infrastructure.Migrations
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("LibraryApp.Core.Models.Catalog", "Catalog")
+                    b.HasOne("LibraryApp.Core.Models.Catalog")
                         .WithMany("Books")
-                        .HasForeignKey("CatalogId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CatalogId");
 
                     b.HasOne("LibraryApp.Core.Models.Series", "Series")
                         .WithMany("Books")
-                        .HasForeignKey("SeriesId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SeriesId");
                 });
 
             modelBuilder.Entity("LibraryApp.Core.Models.Catalog", b =>
@@ -280,14 +274,6 @@ namespace LibraryApp.Infrastructure.Migrations
                     b.HasOne("LibraryApp.Core.Models.User", "User")
                         .WithMany("Catalog")
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("LibraryApp.Core.Models.Series", b =>
-                {
-                    b.HasOne("LibraryApp.Core.Models.Author", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

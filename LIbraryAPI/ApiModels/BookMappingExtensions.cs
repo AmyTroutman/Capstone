@@ -17,11 +17,12 @@ namespace LibraryApp.ApiModels
                 Genre = book.Genre,
                 Notes = book.Notes,
                 Medium = book.Medium,
+                NumInSeries = book.NumInSeries,
                 //BranchName = book.BranchName,
                 AuthorId = book.AuthorId,
-                Author = book.Author != null ? book.Author.LastName + ", " + book.Author.FirstName : null,
+                //Author = book.Author != null ? book.Author.LastName + ", " + book.Author.FirstName : null,
                 SeriesId = book.SeriesId,
-                Series = book.Series != null ? book.Series.Name + " " + book.Series.NumInSeries : null,
+                //Series =  book.Series.Name,
                 //CatalogId = book.CatalogId,
                 //Catalog = book.Catalog.Name
             };
@@ -36,10 +37,11 @@ namespace LibraryApp.ApiModels
                 Genre = bookModel.Genre,
                 Notes = bookModel.Notes,
                 Medium = bookModel.Medium,
+                NumInSeries = bookModel.NumInSeries,
                 //BranchName = bookModel.BranchName,
                 AuthorId = bookModel.AuthorId,
                 SeriesId = bookModel.SeriesId,
-               // CatalogId = bookModel.CatalogId
+                //CatalogId = bookModel.CatalogId
             };
         }
 

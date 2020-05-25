@@ -63,6 +63,19 @@ namespace LibraryApp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Series",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Series", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -189,27 +202,6 @@ namespace LibraryApp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Series",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    NumInSeries = table.Column<int>(nullable: false),
-                    AuthorId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Series", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Series_Authors_AuthorId",
-                        column: x => x.AuthorId,
-                        principalTable: "Authors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Books",
                 columns: table => new
                 {
@@ -219,9 +211,10 @@ namespace LibraryApp.Infrastructure.Migrations
                     Genre = table.Column<string>(nullable: true),
                     Notes = table.Column<string>(nullable: true),
                     Medium = table.Column<string>(nullable: true),
+                    NumInSeries = table.Column<int>(nullable: true),
                     AuthorId = table.Column<int>(nullable: false),
-                    SeriesId = table.Column<int>(nullable: false),
-                    CatalogId = table.Column<int>(nullable: false)
+                    SeriesId = table.Column<int>(nullable: true),
+                    CatalogId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -237,13 +230,13 @@ namespace LibraryApp.Infrastructure.Migrations
                         column: x => x.CatalogId,
                         principalTable: "Catalogs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Books_Series_SeriesId",
                         column: x => x.SeriesId,
                         principalTable: "Series",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -302,11 +295,6 @@ namespace LibraryApp.Infrastructure.Migrations
                 name: "IX_Catalogs_UserId",
                 table: "Catalogs",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Series_AuthorId",
-                table: "Series",
-                column: "AuthorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -333,6 +321,9 @@ namespace LibraryApp.Infrastructure.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Authors");
+
+            migrationBuilder.DropTable(
                 name: "Catalogs");
 
             migrationBuilder.DropTable(
@@ -340,9 +331,6 @@ namespace LibraryApp.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Authors");
         }
     }
 }

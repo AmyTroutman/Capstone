@@ -22,7 +22,7 @@ namespace LibraryApp.ApiModels
         public int? SeriesId { get; set; }
         public string Series { get; set; }
 
-        /*public int CatalogId { get; set; }
-        public string Catalog { get; set; }*/
+        //public int CatalogId { get; set; }
+        //public string Catalog { get; set; }
     }
 }

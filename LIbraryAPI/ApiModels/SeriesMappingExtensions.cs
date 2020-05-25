@@ -15,7 +15,6 @@ namespace LibraryApp.ApiModels
             {
                 Id = series.Id,
                 Name = series.Name,
-                NumInSeries = series.NumInSeries,
                 //AuthorId = series.AuthorId,
                 //Author = series.Author != null ? series.Author.LastName + ", " + series.Author.FirstName : null
             };
@@ -27,7 +26,6 @@ namespace LibraryApp.ApiModels
             {
                 Id = seriesModel.Id,
                 Name = seriesModel.Name,
-                NumInSeries = seriesModel.NumInSeries,
                 //AuthorId = seriesModel.AuthorId
             };
         }

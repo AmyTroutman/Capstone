@@ -25,7 +25,7 @@ namespace LibraryApp.ApiModels
             {
                 Id = catalogModel.Id,
                 Name = catalogModel.Name,
-                UserId = catalogModel.UserId,                
+                //UserId = catalogModel.UserId,                
             };
         }
 
