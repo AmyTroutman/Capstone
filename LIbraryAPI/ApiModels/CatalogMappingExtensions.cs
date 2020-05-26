@@ -1,21 +1,25 @@
 ﻿using LibraryApp.Core.Models;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+
 
 namespace LibraryApp.ApiModels
 {
     public static class CatalogMappingExtensions
     {
+       
         public static CatalogModel ToApiModel(this Catalog catalog)
         {
             return new CatalogModel
             {
                 Id = catalog.Id,
                 Name = catalog.Name,
-                UserId = catalog.UserId,
-                //UserName = catalog.User.FullName
+                //UserId = catalog.User.Id,
+                //User = catalog.User.FullName
             };
         }
 
@@ -25,7 +29,7 @@ namespace LibraryApp.ApiModels
             {
                 Id = catalogModel.Id,
                 Name = catalogModel.Name,
-                //UserId = catalogModel.UserId,                
+                //UserId = catalogModel.UserId
             };
         }
 

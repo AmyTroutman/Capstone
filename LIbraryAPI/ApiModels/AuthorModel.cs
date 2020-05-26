@@ -14,7 +14,6 @@ namespace LibraryApp.ApiModels
 
         public ICollection<BookModel> Books { get; set; }
 
-        //public ICollection<SeriesModel> Series { get; set; }
 
     }
 }

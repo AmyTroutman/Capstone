@@ -13,6 +13,7 @@ namespace LibraryApp.Core.Services
         IEnumerable<Book> GetAll();
         IEnumerable<Book> GetBooksForAuthor(int authorId);
         IEnumerable<Book> GetBooksForSeries(int seriesId);
+        IEnumerable<Book> GetBooksForCatalog(int catalogId);
         void Remove(Book book);
     }
 }

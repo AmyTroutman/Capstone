@@ -13,6 +13,9 @@ namespace LibraryApp.ApiModels
 
         //if you add users:
         public string UserId { get; set; }
-        public string UserName { get; set; }
+        public string User { get; set; }
+
+        public ICollection<Book> Books { get; set; }
+
     }
 }

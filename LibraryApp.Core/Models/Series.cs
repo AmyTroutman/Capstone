@@ -11,7 +11,7 @@ namespace LibraryApp.Core.Models
 
         public ICollection<Book> Books { get; set; }
 
-        /*public int AuthorId { get; set; }
-        public Author Author { get; set; }*/
+        public int AuthorId { get; set; }
+        public Author Author { get; set; }
     }
 }

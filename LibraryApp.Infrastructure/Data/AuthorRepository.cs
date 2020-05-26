@@ -28,15 +28,15 @@ namespace LibraryApp.Infrastructure.Data
         {
             return _appDbContext.Authors
                 .Include(a => a.Books)
-               // .Include(a => a.Books.Series)
-                .SingleOrDefault();
+                .Include(a => a.Series)
+                .SingleOrDefault(a => a.Id ==id);
         }
 
         public IEnumerable<Author> GetAll()
         {
             return _appDbContext.Authors
                 .Include(a => a.Books)
-               // .Include(a => a.Series)
+                .Include(a => a.Series)
                 .ToList();
         }
 

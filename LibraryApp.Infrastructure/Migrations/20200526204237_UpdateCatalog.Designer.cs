@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryApp.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200525194624_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200526204237_UpdateCatalog")]
+    partial class UpdateCatalog
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,7 +39,7 @@ namespace LibraryApp.Infrastructure.Migrations
 
                     b.Property<int>("AuthorId");
 
-                    b.Property<int?>("CatalogId");
+                    b.Property<int>("CatalogId");
 
                     b.Property<string>("Genre");
 
@@ -85,9 +85,13 @@ namespace LibraryApp.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("AuthorId");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Series");
                 });
@@ -108,6 +112,8 @@ namespace LibraryApp.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed");
 
                     b.Property<string>("FirstName");
+
+                    b.Property<string>("FullName");
 
                     b.Property<string>("LastName");
 
@@ -260,9 +266,10 @@ namespace LibraryApp.Infrastructure.Migrations
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("LibraryApp.Core.Models.Catalog")
+                    b.HasOne("LibraryApp.Core.Models.Catalog", "Catalog")
                         .WithMany("Books")
-                        .HasForeignKey("CatalogId");
+                        .HasForeignKey("CatalogId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("LibraryApp.Core.Models.Series", "Series")
                         .WithMany("Books")
@@ -274,6 +281,14 @@ namespace LibraryApp.Infrastructure.Migrations
                     b.HasOne("LibraryApp.Core.Models.User", "User")
                         .WithMany("Catalog")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("LibraryApp.Core.Models.Series", b =>
+                {
+                    b.HasOne("LibraryApp.Core.Models.Author", "Author")
+                        .WithMany("Series")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -71,7 +71,7 @@ namespace LIbraryAPI
             services.AddScoped<IUserService, UserService>();
 
             services.AddScoped<DbInitializer>();
-            //services.AddHttpContextAccessor();
+            services.AddHttpContextAccessor();
             services.AddScoped<ICatalogRepository, CatalogRepository>();
             services.AddScoped<ICatalogService, CatalogService>();
 

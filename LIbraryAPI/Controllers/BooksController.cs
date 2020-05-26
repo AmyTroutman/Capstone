@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace LibraryApp.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class BooksController : ControllerBase
+    //[ApiController]
+    public class BooksController : Controller
     {
         private readonly IBookService _bookService;
 
@@ -78,13 +78,27 @@ namespace LibraryApp.Controllers
             return Ok(bookModels);
         }
 
+        // GET api/catalogs/{catalogId}/books
+        [HttpGet("/api/catalogs/{catalogId}/books")]
+        public IActionResult GetBooksForCatalog(int catalogId)
+        {
+            var bookModels = _bookService
+                .GetBooksForCatalog(catalogId)
+                .ToApiModels();
+
+            return Ok(bookModels);
+        }
+
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody] Book book)
+        public IActionResult Post([FromBody] BookModel bookModel)
         {
             try
             {
-                return Ok(_bookService.Add(book).ToApiModel());
+                var savedBook= _bookService.Add(bookModel.ToDomainModel());
+                //return Ok(_bookService.Add(book).ToApiModel());
+                return CreatedAtAction("Get", new { savedBook.Id }, savedBook.ToApiModel());
+
             }
             catch (Exception ex)
             {
@@ -95,11 +109,12 @@ namespace LibraryApp.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Book book)
+        public IActionResult Put(int id, [FromBody] BookModel book)
         {
             try
             {
-                return Ok(_bookService.Update(book).ToApiModel());
+                var updatedBook = _bookService.Update(book.ToDomainModel());
+                return Ok(updatedBook.ToApiModel());
             }
             catch (Exception ex)
             {

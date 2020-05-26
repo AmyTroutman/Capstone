@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using LibraryApp.ApiModels;
 using LibraryApp.Core.Models;
@@ -22,6 +23,14 @@ namespace LIbraryAPI.Controllers
             _catalogService = catalogService;
         }
 
+        private string CurrentUserId
+        {
+            get
+            {
+                return User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            }
+        }
+
         // GET api/values
         //uncomment below if you want to allow other users to see all users' catalogs
         //[AllowAnonymous]
@@ -30,8 +39,8 @@ namespace LIbraryAPI.Controllers
         {
             try
             {
-                var allCat = _catalogService.GetAll().ToList();
-                return Ok(allCat.ToApiModels());
+                var allCat = _catalogService.GetAll().ToApiModels();
+                return Ok(allCat);
             }
             catch (Exception ex)
             {
@@ -61,11 +70,13 @@ namespace LIbraryAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody] Catalog catalog)
+        public IActionResult Post([FromBody] CatalogModel catalog)
         {
             try
             {
-                return Ok(_catalogService.Add(catalog).ToApiModel());
+                //catalog.UserId = CurrentUserId;
+                var newCatalog = _catalogService.Add(catalog.ToDomainModel());
+                return CreatedAtAction("Get", new { newCatalog.Id }, newCatalog.ToApiModel());
             }
             catch (Exception ex)
             {

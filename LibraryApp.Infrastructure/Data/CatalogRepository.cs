@@ -17,7 +17,7 @@ namespace LibraryApp.Infrastructure.Data
         }
 
         public Catalog Add(Catalog catalog)
-        {
+        {            
             _appDbContext.Catalogs.Add(catalog);
             _appDbContext.SaveChanges();
             return catalog;
@@ -27,8 +27,8 @@ namespace LibraryApp.Infrastructure.Data
         {
             return _appDbContext.Catalogs
                 .Include(c => c.Books)
-                //would I want to include user?
-               // .Include(c => c.User)
+                .ThenInclude(b => b.Author)
+                .ThenInclude(b => b.Series)
                 .SingleOrDefault(c => c.Id == id);
         }
 
@@ -36,7 +36,8 @@ namespace LibraryApp.Infrastructure.Data
         {
             return _appDbContext.Catalogs
                 .Include(c => c.Books)
-               // .Include(c => c.User)
+                .ThenInclude(b => b.Author)
+                .ThenInclude(b => b.Series)
                 .ToList();
         }
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LibraryApp.Infrastructure.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class CreateInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,19 +60,6 @@ namespace LibraryApp.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Authors", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Series",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Series", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -202,6 +189,26 @@ namespace LibraryApp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Series",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    AuthorId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Series", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Series_Authors_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Authors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Books",
                 columns: table => new
                 {
@@ -214,7 +221,7 @@ namespace LibraryApp.Infrastructure.Migrations
                     NumInSeries = table.Column<int>(nullable: true),
                     AuthorId = table.Column<int>(nullable: false),
                     SeriesId = table.Column<int>(nullable: true),
-                    CatalogId = table.Column<int>(nullable: true)
+                    CatalogId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -230,7 +237,7 @@ namespace LibraryApp.Infrastructure.Migrations
                         column: x => x.CatalogId,
                         principalTable: "Catalogs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Books_Series_SeriesId",
                         column: x => x.SeriesId,
@@ -295,6 +302,11 @@ namespace LibraryApp.Infrastructure.Migrations
                 name: "IX_Catalogs_UserId",
                 table: "Catalogs",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Series_AuthorId",
+                table: "Series",
+                column: "AuthorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -321,9 +333,6 @@ namespace LibraryApp.Infrastructure.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Authors");
-
-            migrationBuilder.DropTable(
                 name: "Catalogs");
 
             migrationBuilder.DropTable(
@@ -331,6 +340,9 @@ namespace LibraryApp.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Authors");
         }
     }
 }

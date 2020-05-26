@@ -13,16 +13,15 @@ namespace LibraryApp.ApiModels
         public string Genre { get; set; }
         public string Notes { get; set; }
         public string Medium { get; set; }
-        //public string BranchName { get; set; }
-        public int? NumInSeries { get; set; }
 
         public int AuthorId { get; set; }
         public string Author { get; set; }
 
         public int? SeriesId { get; set; }
         public string Series { get; set; }
+        public int? NumInSeries { get; set; }
 
-        //public int CatalogId { get; set; }
-        //public string Catalog { get; set; }
+        public int CatalogId { get; set; }
+        public string Catalog { get; set; }
     }
 }

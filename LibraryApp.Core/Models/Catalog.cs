@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LibraryApp.Core.Models
 {
-    public class Catalog
+    public class Catalog : IEntity<int>
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -14,5 +14,7 @@ namespace LibraryApp.Core.Models
         public User User { get; set; }
 
         public ICollection<Book> Books { get; set; }
-    }
+/*        public ICollection<Series> Series { get; set; }
+        public ICollection<Author> Authors { get; set; }
+*/    }
 }

@@ -42,6 +42,7 @@ namespace LibraryApp.Infrastructure.Data
             return _appDbContext.Books
                 .Include(b => b.Author)
                 .Include(b => b.Series)
+                .Include(b => b.Catalog)
                 .SingleOrDefault(b => b.Id == id);
                 
         }
@@ -51,6 +52,7 @@ namespace LibraryApp.Infrastructure.Data
             return _appDbContext.Books
                 .Include(b => b.Author)
                 .Include(b => b.Series)
+                .Include(b => b.Catalog)
                 .ToList();
         }
 
@@ -59,6 +61,7 @@ namespace LibraryApp.Infrastructure.Data
             return _appDbContext.Books
                 .Include(b => b.Author)
                 .Include(b => b.Series)
+                .Include(b => b.Catalog)
                 .Where(b => b.AuthorId == authorId)
                 .ToList();
         }
@@ -68,7 +71,16 @@ namespace LibraryApp.Infrastructure.Data
             return _appDbContext.Books
                 .Include(b => b.Series)
                 .Include(b => b.Author)
+                .Include(b => b.Catalog)
                 .Where(b => b.SeriesId == seriesId)
+                .ToList();
+        }
+        public IEnumerable<Book> GetBooksForCatalog(int catalogId)
+        {
+            return _appDbContext.Books
+                .Include(b => b.Catalog)
+                .Include(b => b.Catalog.User)
+                .Where(b => b.CatalogId == catalogId)
                 .ToList();
         }
 

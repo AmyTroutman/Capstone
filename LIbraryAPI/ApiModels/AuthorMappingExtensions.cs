@@ -14,7 +14,7 @@ namespace LibraryApp.ApiModels
             {
                 Id = author.Id,
                 FirstName = author.FirstName,
-                LastName = author.LastName
+                LastName = author.LastName,
             };
         }
 

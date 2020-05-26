@@ -12,16 +12,16 @@ namespace LibraryApp.Core.Models
         public string Genre { get; set; }
         public string Notes { get; set; }
         public string Medium { get; set; }
-        //public string BranchName { get; set; }
-        public int? NumInSeries { get; set; }
 
         public int AuthorId { get; set; }
         public Author Author { get; set; }
 
         public int? SeriesId { get; set; }
         public Series Series { get; set; }
+        public int? NumInSeries { get; set; }
 
-        //public int CatalogId { get; set; }
-        //public Catalog Catalog { get; set; }
+
+        public int CatalogId { get; set; }
+        public Catalog Catalog { get; set; }
     }
 }

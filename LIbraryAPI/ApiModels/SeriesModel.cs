@@ -13,7 +13,7 @@ namespace LibraryApp.ApiModels
 
         public ICollection<BookModel> Books { get; set; }
 
-        //public int AuthorId { get; set; }
-        //public string Author { get; set; }
+        public int AuthorId { get; set; }
+        public string Author { get; set; }
     }
 }

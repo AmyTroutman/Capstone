@@ -55,6 +55,11 @@ namespace LibraryApp.Core.Services
             return _bookRepo.GetBooksForSeries(seriesId);
         }
 
+        public IEnumerable<Book> GetBooksForCatalog(int catalogId)
+        {
+            return _bookRepo.GetBooksForCatalog(catalogId);
+        }
+
         public void Remove(int id)
         {
             var book = _bookRepo.Get(id);
